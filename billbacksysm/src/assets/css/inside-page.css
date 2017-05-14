@@ -1,0 +1,27 @@
+.title-box{
+	padding-top: 20px;
+	margin-bottom: 50px;
+	border-bottom: 3px solid #ccc;
+	padding-bottom: 20px;
+}
+.title-box span{
+	display: inline-block;
+	width: 100px;
+	padding-left: 10px;
+	font-size: 18px;
+}
+.title-box .record-tt:after{
+	position: absolute;
+	display:block;
+	content: "";
+	height: 1px;
+	position: absolute;
+    content: "";
+    width: 100px;
+    height: 3px;
+    z-index: 999;
+    background-color:#3BD0BD;
+    margin-top: 20px;
+    margin-left:-10px;
+	
+}

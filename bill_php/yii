@@ -1,0 +1,29 @@
+#!/usr/bin/env php
+<?php
+defined('YII_DEBUG') or define('YII_DEBUG', true);
+defined('YII_ENV') or define('YII_ENV', 'dev');
+
+$basePath = __DIR__ . DIRECTORY_SEPARATOR;
+$vendorPath = $basePath . 'vendor' . DIRECTORY_SEPARATOR;
+$consolePath = $basePath . DIRECTORY_SEPARATOR . 'console' . DIRECTORY_SEPARATOR;
+$commonConfigPath = $basePath . 'common' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR;
+$consoleConfigPath = $consolePath . 'config' . DIRECTORY_SEPARATOR;
+
+require($vendorPath . 'autoload.php');
+require($vendorPath . 'yiisoft' . DIRECTORY_SEPARATOR . 'yii2' . DIRECTORY_SEPARATOR . 'Yii.php');
+require($commonConfigPath . 'bootstrap.php');
+require($consoleConfigPath . 'bootstrap.php');
+
+$commonLocalConfig = file_exists($commonConfigPath . 'main-local.php') ? require($commonConfigPath . 'main-local.php') : [];
+$consoleLocalConfig = file_exists($consoleConfigPath . 'main-local.php') ? require($consoleConfigPath . 'main-local.php') : [];
+
+$config = yii\helpers\ArrayHelper::merge(
+	require($commonConfigPath . 'main.php'),
+	$commonLocalConfig,
+	require($consoleConfigPath . 'main.php'),
+	$consoleLocalConfig
+);
+
+$application = new yii\console\Application($config);
+$exitCode = $application->run();
+exit($exitCode);
